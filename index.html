@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyundai Exter Log Book — KL 02 BZ 3133 | Antony Ancil</title>
+<link rel="icon" type="image/png" href="/favicon-32x32.png">
+<style>
+:root{
+  --navy:#1B3A6B; --navy2:#0D1F3C; --dark:#0D1F3C;
+  --gold:#C9A227; --gold-light:#f0c060;
+  --green:#1A6B3A; --web:#1A4A8B;
+  --light:#F7F5F0; --bg:#F7F5F0; --card:#FFFFFF;
+  --border:#E8E4DC; --muted:#5a6480; --ink:#1a1a2e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{background:var(--navy);padding:0.7rem 1.2rem;border-bottom:3px solid var(--gold);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;position:sticky;top:0;z-index:100}
+.nav-brand{color:var(--gold);font-family:Georgia,serif;font-size:1.05rem;font-weight:700;letter-spacing:0.5px}
+.nav-brand span{color:#fff;font-size:0.68rem;display:block;letter-spacing:2px;font-family:Arial,sans-serif;font-weight:400;margin-top:2px}
+.nav-links{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center}
+.nav-links button{border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:#ddd;font-size:0.78rem;padding:6px 12px;border-radius:20px;cursor:pointer;transition:0.2s}
+.nav-links button:hover{border-color:var(--gold);color:var(--gold)}
+.nav-links button.active{background:var(--gold);color:var(--navy);font-weight:700;border-color:var(--gold)}
+
+/* announce */
+.announce{background:#FFF4E5;border-bottom:1px solid #FFD699;padding:8px 1rem;text-align:center;font-size:0.8rem;color:#6a4a0a}
+.announce b{color:var(--navy)}
+
+/* wrapper */
+.wrap{max-width:1100px;margin:0 auto;padding:1.2rem}
+.panel{display:none}
+.panel.active{display:block}
+
+/* cards */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0.9rem}
+@media(max-width:800px){.grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid-3{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;box-shadow:0 2px 10px rgba(27,58,107,0.06)}
+.card-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:0.3rem}
+.card-value{font-family:Georgia,serif;font-size:1.7rem;font-weight:800;color:var(--navy);line-height:1.1}
+.card-sub{font-size:0.78rem;color:var(--muted);margin-top:0.25rem}
+.card.gold{border-color:var(--gold);background:linear-gradient(135deg,#FFF9E5 0%,#fff 70%)}
+.card.green{border-color:#9FDDB2;background:linear-gradient(135deg,#E9F8EE 0%,#fff 70%)}
+
+/* forms */
+.form-card{background:#fff;border:2px solid var(--navy);border-radius:16px;padding:1.1rem}
+.form-title{font-family:Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:0.8rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-size:0.72rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted)}
+.fg input,.fg select{border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-size:0.92rem;outline:none;transition:0.2s;background:#fff}
+.fg input:focus,.fg select:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,58,107,0.12)}
+.fg input.yellow{background:#FFFBEA;border-color:#F3D26A}
+.btn{border:none;border-radius:10px;padding:11px 16px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:0.2s}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy2)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-ghost{background:#F7F5F0;border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--navy);color:var(--navy)}
+.badge{display:inline-block;padding:3px 8px;border-radius:20px;font-size:0.68rem;font-weight:700;letter-spacing:0.5px}
+.badge-green{background:#D9F5E1;color:#0F5A27}
+.badge-amber{background:#FFF1CC;color:#7A5A00}
+.badge-red{background:#FFE0E0;color:#8B1A1A}
+
+/* tables */
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:12px;background:#fff;margin-top:0.8rem}
+table{width:100%;border-collapse:collapse;font-size:0.84rem;min-width:620px}
+th{background:var(--navy);color:#fff;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;padding:10px 8px;text-align:left;position:sticky;top:0}
+td{padding:8px;border-bottom:1px solid #f0ede6}
+tr:nth-child(even) td{background:#FCFBF8}
+tr:hover td{background:#FFF7D6}
+
+/* settings bar */
+.settings-bar{background:#0D1F3C;color:#fff;border-radius:12px;padding:0.8rem 1rem;display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+.settings-bar input{flex:1;min-width:220px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);padding:8px 10px;background:rgba(255,255,255,0.08);color:#fff}
+.settings-bar input::placeholder{color:rgba(255,255,255,0.5)}
+
+/* footer */
+footer{margin-top:2rem;padding:1.2rem;text-align:center;font-size:0.72rem;color:var(--muted);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-brand">HYUNDAI EXTER <span>KL 02 BZ 3133 • Antony Ancil • Kollam</span></div>
+  <div class="nav-links">
+    <button data-tab="dashboard" class="active" onclick="openTab('dashboard',this)">📊 Dashboard</button>
+    <button data-tab="trip" onclick="openTab('trip',this)">🚗 Trip Log</button>
+    <button data-tab="maintenance" onclick="openTab('maintenance',this)">🔧 Maintenance</button>
+    <button data-tab="monthly" onclick="openTab('monthly',this)">📅 Monthly</button>
+    <button data-tab="registration" onclick="openTab('registration',this)">🪪 Registration</button>
+    <button data-tab="settings" onclick="openTab('settings',this)">⚙️ Settings</button>
+  </div>
+</div>
+
+<div class="announce">Next Service: <b id="annNextService">10,000 km</b> • Fuel Price: <b id="annFuelPrice">₹114.52/L</b> • Last Entry: <b id="annLastEntry">—</b> • Total Trips: <b id="annTrips">—</b></div>
+
+<div class="wrap">
+
+<!-- GOOGLE SHEET SYNC BAR -->
+<div class="settings-bar">
+  <span style="font-size:0.8rem">🔗 Google Sheet Web App URL (Apps Script):</span>
+  <input id="sheetUrl" placeholder="Paste Apps Script Web App URL here – like https://script.google.com/macros/s/xxx/exec">
+  <button class="btn btn-gold" style="padding:7px 12px;font-size:0.8rem" onclick="saveSheetUrl()">Save</button>
+  <span id="syncStatus" style="font-size:0.75rem;color:#9FDDB2"></span>
+</div>
+
+<!-- DASHBOARD -->
+<div id="panel-dashboard" class="panel active">
+  <h2 style="font-family:Georgia,serif;margin-bottom:0.8rem">📊 Live Dashboard – KL 02 BZ 3133</h2>
+  <div class="grid-3" style="margin-bottom:1rem">
+    <div class="card gold"><div class="card-label">🚗 Total KM Driven</div><div class="card-value" id="dTotalKm">0</div><div class="card-sub" id="dTotalKmSub">From 28-Aug-2025</div></div>
+    <div class="card"><div class="card-label">💰 Total Fuel Cost</div><div class="card-value" id="dFuelCost">₹0</div><div class="card-sub" id="dFuelCostSub">All fill-ups</div></div>
+    <div class="card"><div class="card-label">🛢️ Total Liters</div><div class="card-value" id="dLiters">0 L</div><div class="card-sub">Auto calc: Cost ÷ Price</div></div>
+    <div class="card green"><div class="card-label">⚡ Avg Mileage km/L</div><div class="card-value" id="dMileage">0</div><div class="card-sub">Total KM ÷ Total Liters</div></div>
+    <div class="card"><div class="card-label">💸 Cost per KM</div><div class="card-value" id="dCostKm">₹0</div><div class="card-sub">Fuel Cost ÷ Total KM</div></div>
+    <div class="card"><div class="card-label">🔧 Maintenance Total</div><div class="card-value" id="dMaint">₹0</div><div class="card-sub" id="dMaintSub">SOT + Service + Insurance docs</div></div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card"><div class="card-label">🚗 Vehicle Details</div>
+      <div style="font-size:0.86rem;line-height:1.7">
+        Purchase: <b>28-Aug-2025</b><br>
+        Price: <b>₹10,08,365</b><br>
+        Current Value (est.): <b>₹1,00,836</b><br>
+        Depreciation: <b>₹9,07,528</b><br>
+        Model: <b>Exter 1.2 AMT KAPPA S – Ranger Khaki</b><br>
+        VIN: <b>MALB281CYSM194537</b><br>
+        Engine: <b>G4LASM492306</b><br>
+        Insurance Renewal: <b style="color:#B42318">29-Aug-2028</b><br>
+        SOT Super: <b>5Y / 50,000 km till 29-Sep-2030</b>
+      </div>
+    </div>
+    <div class="card"><div class="card-label">⛽ Fuel Price History – Date wise Auto</div>
+      <div style="font-size:0.82rem;margin-bottom:0.6rem">Current price from Settings auto-applies to new trips. Old trips keep price at fill-up. Update history below when pump price changes.</div>
+      <div class="table-wrap" style="min-width:0"><table style="min-width:300px"><thead><tr><th>Date</th><th>Price Rs/L</th></tr></thead><tbody id="priceHistoryTbody"></tbody></table></div>
+      <div style="margin-top:0.6rem;display:flex;gap:0.5rem"><input id="phDate" type="date" style="border:1px solid var(--border);border-radius:8px;padding:6px 8px"><input id="phPrice" type="number" step="0.01" placeholder="114.52" style="border:1px solid var(--border);border-radius:8px;padding:6px 8px;width:90px"><button class="btn btn-navy" style="padding:6px 10px;font-size:0.8rem" onclick="addPriceHistory()">Add</button></div>
+    </div>
+    <div class="card"><div class="card-label">📈 Recent Fill-ups & Mileage Trend</div><div id="recentFillups" style="font-size:0.82rem"></div></div>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <div class="card-label">📋 How To Use – Same as Excel, but mobile friendly</div>
+    <div style="font-size:0.85rem;line-height:1.7">
+      <b>Step 1:</b> Open Trip Log → Enter <b>End KM</b> (current odometer) – Start KM auto fills from last trip.<br>
+      <b>Step 2:</b> Enter Destination, Fuel Cost if filled, Price at fill-up auto from Settings.<br>
+      <b>Step 3:</b> Save – Dashboard, Monthly, Mileage auto update.<br>
+      <b>Step 4:</b> For service – go to Maintenance tab, add service record – total goes to Dashboard.<br>
+      <b>Step 5:</b> Settings → Yellow cells are only ones you edit. Update fuel price when pump changes.<br>
+      <b>Phone tip:</b> Add to Home Screen – Chrome → Share → Add to Home Screen – use like app in car.
+    </div>
+  </div>
+</div>
+
+<!-- TRIP LOG -->
+<div id="panel-trip" class="panel">
+  <h2 style="font-family:Georgia,serif;margin-bottom:0.8rem">🚗 Trip Log – Enter Current Kilometer</h2>
+  <div class="form-card">
+    <div class="form-title">New Trip Entry – Only Yellow Fields You Enter</div>
+    <div class="form-grid">
+      <div class="fg"><label>Date</label><input id="tDate" type="date"></div>
+      <div class="fg"><label>Start KM (auto)</label><input id="tStart" type="number" readonly style="background:#F7F5F0"></div>
+      <div class="fg"><label>End KM – Current Odo (enter) ⭐</label><input id="tEnd" type="number" class="yellow" placeholder="e.g. 8750"></div>
+      <div class="fg"><label>KM Done (auto)</label><input id="tKMDone" type="number" readonly style="background:#F7F5F0"></div>
+      <div class="fg"><label>Destination</label><input id="tDest" type="text" class="yellow" placeholder="Dalavapuram, Trivandrum, Lida Dale..."></div>
+      <div class="fg"><label>Fuel Cost Rs (0 if none) ⭐</label><input id="tFuel" type="number" class="yellow" placeholder="0"></div>
+      <div class="fg"><label>Price at Fill-up Rs/L (auto)</label><input id="tPrice" type="number" step="0.01"></div>
+      <div class="fg"><label>Liters (auto) = Cost ÷ Price</label><input id="tLiters" type="number" readonly style="background:#F7F5F0"></div>
+    </div>
+    <div style="margin-top:0.9rem;display:flex;gap:0.6rem;flex-wrap:wrap">
+      <button class="btn btn-navy" onclick="saveTrip()">💾 Save Trip + Sync to GDrive</button>
+      <button class="btn btn-ghost" onclick="resetTripForm()">Reset</button>
+      <span id="tripMsg" style="font-size:0.85rem;color:var(--green);align-self:center"></span>
+    </div>
+  </div>
+
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Start</th><th>End</th><th>KM</th><th>Destination</th><th>Fuel Rs</th><th>Liters</th><th>Rs/L</th><th>Price@Fill</th><th>Mileage</th><th></th></tr></thead><tbody id="tripTbody"></tbody></table></div>
+  <div style="margin-top:0.6rem;display:flex;gap:0.6rem"><button class="btn btn-ghost" onclick="exportTripsCSV()">⬇ Export Trip CSV</button><button class="btn btn-ghost" onclick="exportTripsExcel()">⬇ Export Excel Compatible</button></div>
+</div>
+
+<!-- MAINTENANCE -->
+<div id="panel-maintenance" class="panel">
+  <h2 style="font-family:Georgia,serif;margin-bottom:0.8rem">🔧 Maintenance & Service Records – New Page</h2>
+  <div class="form-card" style="border-color:var(--green)">
+    <div class="form-title">Add Maintenance Record – Service / SOT / Insurance / Accidental</div>
+    <div class="form-grid">
+      <div class="fg"><label>Date</label><input id="mDate" type="date"></div>
+      <div class="fg"><label>KM at Service</label><input id="mKM" type="number" class="yellow" placeholder="7771"></div>
+      <div class="fg"><label>Type</label><select id="mType"><option>Free Service</option><option>Paid Service</option><option>SOT Super Package</option><option>PMS Package</option><option>Insurance</option><option>Accidental Repair</option><option>PUC</option><option>Tyre / Battery / Other</option></select></div>
+      <div class="fg"><label>Cost Rs</label><input id="mCost" type="number" class="yellow" placeholder="0"></div>
+      <div class="fg"><label>Description / Work Done</label><input id="mDesc" type="text" placeholder="2nd Free Service – Oil + Filter – Popular Kollam"></div>
+      <div class="fg"><label>Vendor / Dealer</label><input id="mVendor" type="text" value="Popular Motor World, Kollam"></div>
+      <div class="fg"><label>Invoice No</label><input id="mInv" type="text" placeholder="Y202607204 / B202607129"></div>
+      <div class="fg"><label>Next Due (KM or Date)</label><input id="mNext" type="text" placeholder="10,000 km or 29-Aug-2028"></div>
+    </div>
+    <div style="margin-top:0.9rem;display:flex;gap:0.6rem"><button class="btn btn-navy" onclick="saveMaintenance()">💾 Save Maintenance + Sync</button><button class="btn btn-ghost" onclick="resetMaintForm()">Reset</button><span id="maintMsg" style="font-size:0.85rem;color:var(--green);align-self:center"></span></div>
+  </div>
+
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>KM</th><th>Type</th><th>Description</th><th>Cost</th><th>Vendor</th><th>Invoice</th><th>Next Due</th><th></th></tr></thead><tbody id="maintTbody"></tbody></table></div>
+
+  <div class="card" style="margin-top:1rem;background:#E9F8EE;border-color:#9FDDB2">
+    <div class="card-label">📎 Documents from your uploads – Pre-filled</div>
+    <div style="font-size:0.85rem;line-height:1.8">
+      • <b>2nd Free Service – 24-07-2026 – 7771 km</b> – RO R202607169 – EOIL 0W20 3.6L + Oil Filter – Cost ₹0 (Free) – Y202607204<br>
+      • <b>SOT Super 5Y/50k km</b> – 23-07-2026 – VIN MALB281CYSM194537 – ₹26,779 + GST ₹4,820 = <b>₹31,599.22</b> – Cert 2607007308<br>
+      • <b>Accidental Repair</b> – 22-07-2026 – Garnish Assy + Accidental Repair – ₹462.72 + ₹5,600 + GST ₹1,008 = <b>₹7,070.72</b> – B202607129<br>
+      • <b>Insurance – SBI General</b> – 2026-27 – IDV ₹7,17,476 – KL 02 BZ 3133 – SUV – Petrol<br>
+      • <b>Purchase – 28-Aug-2025</b> – ₹10,08,365 – Popular Motor World<br>
+      All totals auto-added to Dashboard Maintenance Total.
+    </div>
+  </div>
+</div>
+
+<!-- MONTHLY -->
+<div id="panel-monthly" class="panel">
+  <h2 style="font-family:Georgia,serif;margin-bottom:0.8rem">📅 Monthly Summary – Auto from Trip Log</h2>
+  <div class="table-wrap"><table><thead><tr><th>Month</th><th>Total KM</th><th>Fuel Cost</th><th>Liters</th><th>Trips</th><th>Avg KM/Trip</th><th>Rs/KM</th><th>Avg Mileage</th></tr></thead><tbody id="monthlyTbody"></tbody></table></div>
+</div>
+
+<!-- REGISTRATION -->
+<div id="panel-registration" class="panel">
+  <h2 style="font-family:Georgia,serif;margin-bottom:0.8rem">🪪 Registration – KL 02 BZ 3133</h2>
+  <div class="grid-3">
+    <div class="card"><div class="card-label">👤 Owner</div><div style="font-size:0.9rem;line-height:1.8">Name: <b>Antony Ancil</b><br>Father: <b>Ancil</b><br>Address: <b>Lida Dale, 39/715, Eravipuram PO, Kollam – 691011</b><br>Phone: <b>8589895659</b><br>Email: <b>idivet@gmail.com</b></div></div>
+    <div class="card"><div class="card-label">🚗 Vehicle</div><div style="font-size:0.9rem;line-height:1.8">Reg: <b>KL 02 BZ 3133</b><br>Model: <b>Hyundai Exter 1.2 AMT KAPPA S</b><br>Class: <b>LMV</b><br>Fuel: <b>Petrol (E20)</b><br>Colour: <b>Ranger Khaki</b><br>Mfg: <b>July 2025</b><br>Engine: <b>G4LASM492306</b><br>Chassis: <b>MALB281CYSM194537</b><br>Seating: <b>5</b></div></div>
+    <div class="card"><div class="card-label">📄 Insurance & SOT</div><div style="font-size:0.9rem;line-height:1.8">Insurance: <b>SBI General – IDV ₹7,17,476</b><br>Policy: <b>2026-27</b><br>Renewal: <b>29-Aug-2028</b><br>SOT Super: <b>5Y / 50k km till 29-Sep-2030</b><br>Cert No: <b>2607007308</b><br>Dealer: <b>Popular Motor World, Kollam</b></div></div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="panel-settings" class="panel">
+  <h2 style="font-family:Georgia,serif;margin-bottom:0.8rem">⚙️ Settings – Yellow cells you edit</h2>
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="fg"><label>Vehicle</label><input id="sVehicle" value="Hyundai Exter"></div>
+      <div class="fg"><label>Current Fuel Price Rs/L ⭐</label><input id="sFuelPrice" type="number" step="0.01" class="yellow" value="114.52"></div>
+      <div class="fg"><label>Purchase Date</label><input id="sPurchaseDate" type="date" value="2025-08-28"></div>
+      <div class="fg"><label>Purchase Price Rs</label><input id="sPurchasePrice" type="number" value="1008365"></div>
+      <div class="fg"><label>Current Value Rs (est.)</label><input id="sCurrentValue" type="number" value="100836.5"></div>
+      <div class="fg"><label>Insurance Renewal</label><input id="sInsurance" type="date" value="2028-08-29"></div>
+      <div class="fg"><label>Next Service KM</label><input id="sNextService" type="number" value="10000"></div>
+      <div class="fg"><label>Owner</label><input id="sOwner" value="Antony Ancil"></div>
+      <div class="fg"><label>Location</label><input id="sLocation" value="Kollam, Kerala"></div>
+    </div>
+    <div style="margin-top:0.9rem;display:flex;gap:0.6rem"><button class="btn btn-navy" onclick="saveSettings()">💾 Save Settings + Sync</button><span id="settingsMsg" style="font-size:0.85rem;color:var(--green)"></span></div>
+    <div style="margin-top:1rem;padding:0.8rem;background:#FFFBEA;border:1px dashed #F3D26A;border-radius:10px;font-size:0.82rem">⚠️ Update Fuel Price whenever price changes at pump! This will auto-apply to new trips and log into Fuel Price History for date-wise tracking.</div>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <div class="card-label">🔧 Apps Script – Code.gs (like Candidate Registration)</div>
+    <div style="font-size:0.82rem;margin-bottom:0.6rem">Create Google Sheet named <b>Exter_Log_DB</b> with 4 tabs: <b>Trip Log, Maintenance, Settings, FuelPriceHistory</b>. Then Extensions → Apps Script → paste Code.gs → Deploy → Web App → Anyone → Copy URL → paste in top bar.</div>
+    <pre id="codeGs" style="background:#0D1F3C;color:#C9D6F0;padding:1rem;border-radius:10px;overflow:auto;font-size:0.72rem;line-height:1.5;white-space:pre-wrap"></pre>
+    <div style="margin-top:0.6rem;display:flex;gap:0.6rem"><button class="btn btn-ghost" onclick="copyCode()">Copy Code.gs</button><button class="btn btn-ghost" onclick="downloadCode()">Download Code.gs</button></div>
+  </div>
+</div>
+
+</div>
+
+<footer>Hyundai Exter KL 02 BZ 3133 • Built for Antony Ancil • Plain HTML – No React – VGC Style • Add to Home Screen for car use</footer>
+
+<script>
+// --- TAB SWITCH ---
+function openTab(tab, btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+tab).classList.add('active');
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active'); else document.querySelector('[data-tab="'+tab+'"]')?.classList.add('active');
+  if(tab==='monthly') renderMonthly();
+  if(tab==='dashboard') renderDashboard();
+  history.replaceState(null,null,'#'+tab);
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  const h=location.hash.replace('#','');
+  if(h) openTab(h,null);
+});
+
+// --- STORAGE KEYS ---
+const LS_TRIPS='exter_trips_v2';
+const LS_MAINT='exter_maint_v2';
+const LS_SETTINGS='exter_settings_v2';
+const LS_FUELHIST='exter_fuel_hist_v2';
+const LS_SHEETURL='exter_sheet_url';
+
+// --- DEFAULT DATA FROM EXCEL (288 trips) ---
+const DEFAULT_TRIPS = [{"date": "01-Sep-25", "start_km": 0, "end_km": 50, "km_done": 50, "destination": "Popular", "fuel_cost": 530, "liters": 4.6280125742228435, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "01-Sep-25", "start_km": 50, "end_km": 94, "km_done": 44, "destination": "Lida Dale", "fuel_cost": 4045.47, "liters": 35.32544533705903, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "02-Sep-25", "start_km": 94, "end_km": 124, "km_done": 30, "destination": "Bishop Jerome Nagar", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "03-Sep-25", "start_km": 124, "end_km": 130, "km_done": 6, "destination": "Thanni", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Sep-25", "start_km": 130, "end_km": 190, "km_done": 60, "destination": "Trivandrum", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Sep-25", "start_km": 190, "end_km": 250, "km_done": 60, "destination": "Lida Dale", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "07-Sep-25", "start_km": 250, "end_km": 284, "km_done": 34, "destination": "Mangad / Supreme", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "08-Sep-25", "start_km": 284, "end_km": 316, "km_done": 32, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Sep-25", "start_km": 316, "end_km": 327, "km_done": 11, "destination": "Mini Drop Off", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Sep-25", "start_km": 327, "end_km": 334, "km_done": 7, "destination": "Scooby Shot", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Sep-25", "start_km": 334, "end_km": 351, "km_done": 17, "destination": "Popular / LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "12-Sep-25", "start_km": 351, "end_km": 401, "km_done": 50, "destination": "Akil's Day Out", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-Sep-25", "start_km": 401, "end_km": 602, "km_done": 201, "destination": "Leela Palace", "fuel_cost": 4066.85, "liters": 35.51213761788334, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "14-Sep-25", "start_km": 602, "end_km": 637, "km_done": 35, "destination": "District Hospital", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "15-Sep-25", "start_km": 637, "end_km": 653, "km_done": 16, "destination": "NS Hospital ", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Sep-25", "start_km": 653, "end_km": 666, "km_done": 13, "destination": "Ramees", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "17-Sep-25", "start_km": 666, "end_km": 700, "km_done": 34, "destination": "Bike / Vadi", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "18-Sep-25", "start_km": 700, "end_km": 715, "km_done": 15, "destination": "Anas Store", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "19-Sep-25", "start_km": 715, "end_km": 747, "km_done": 32, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "20-Sep-25", "start_km": 747, "end_km": 758, "km_done": 11, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "22-Sep-25", "start_km": 758, "end_km": 774, "km_done": 16, "destination": "B Jerome Nagar", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-Sep-25", "start_km": 774, "end_km": 796, "km_done": 22, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "24-Sep-25", "start_km": 796, "end_km": 810, "km_done": 14, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "27-Sep-25", "start_km": 810, "end_km": 864, "km_done": 54, "destination": "Club Mahindra", "fuel_cost": 3909.69, "liters": 34.13980090813832, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "28-Sep-25", "start_km": 864, "end_km": 884, "km_done": 20, "destination": "BJ Institute", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "29-Sep-25", "start_km": 884, "end_km": 1106, "km_done": 222, "destination": "Ilaveezhapoonchira", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "30-Sep-25", "start_km": 1106, "end_km": 1270, "km_done": 164, "destination": "Kakayam Water Falls", "fuel_cost": 3643.09, "liters": 31.811823262312263, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "03-Oct-25", "start_km": 1270, "end_km": 1288, "km_done": 18, "destination": "Popular Service  [Maint. Rs.25226]", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "03-Oct-25", "start_km": 1288, "end_km": 1301, "km_done": 13, "destination": "Supreme Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "04-Oct-25", "start_km": 1301, "end_km": 1315, "km_done": 14, "destination": "Thattamala", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Oct-25", "start_km": 1315, "end_km": 1342, "km_done": 27, "destination": "Cascade Island", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Oct-25", "start_km": 1342, "end_km": 1365, "km_done": 23, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "07-Oct-25", "start_km": 1365, "end_km": 1388, "km_done": 23, "destination": "BBH", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "08-Oct-25", "start_km": 1388, "end_km": 1430, "km_done": 42, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Oct-25", "start_km": 1430, "end_km": 1452, "km_done": 22, "destination": "Popular Service", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Oct-25", "start_km": 1452, "end_km": 1465, "km_done": 13, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Oct-25", "start_km": 1465, "end_km": 1489, "km_done": 24, "destination": "Sono Scan Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "11-Oct-25", "start_km": 1489, "end_km": 1648, "km_done": 159, "destination": "Kovalam", "fuel_cost": 3206.23, "liters": 27.99711840726511, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "12-Oct-25", "start_km": 1648, "end_km": 1670, "km_done": 22, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-Oct-25", "start_km": 1670, "end_km": 1700, "km_done": 30, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "15-Oct-25", "start_km": 1700, "end_km": 1724, "km_done": 24, "destination": "Kavanad", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Oct-25", "start_km": 1724, "end_km": 1742, "km_done": 18, "destination": "Railways Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "17-Oct-25", "start_km": 1742, "end_km": 1755, "km_done": 13, "destination": "Thevally", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "17-Oct-25", "start_km": 1755, "end_km": 1775, "km_done": 20, "destination": "Experienza", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "18-Oct-25", "start_km": 1775, "end_km": 1805, "km_done": 30, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "19-Oct-25", "start_km": 1805, "end_km": 1844, "km_done": 39, "destination": "Supreme Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-Oct-25", "start_km": 1844, "end_km": 1860, "km_done": 16, "destination": "Ramees", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "22-Oct-25", "start_km": 1860, "end_km": 1868, "km_done": 8, "destination": "Indusind", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "22-Oct-25", "start_km": 1868, "end_km": 1888, "km_done": 20, "destination": "Port Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "22-Oct-25", "start_km": 1888, "end_km": 1889, "km_done": 1, "destination": "Home", "fuel_cost": 3575.07, "liters": 31.217865874956342, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "24-Oct-25", "start_km": 1889, "end_km": 1949, "km_done": 60, "destination": "Akil's Day Out", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "25-Oct-25", "start_km": 1949, "end_km": 2128, "km_done": 179, "destination": "Trivandrum", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "28-Oct-25", "start_km": 2128, "end_km": 2169, "km_done": 41, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "29-Oct-25", "start_km": 2169, "end_km": 2196, "km_done": 27, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "30-Oct-25", "start_km": 2196, "end_km": 2208, "km_done": 12, "destination": "Vadi", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "31-Oct-25", "start_km": 2208, "end_km": 2228, "km_done": 20, "destination": "VH School", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "01-Nov-25", "start_km": 2228, "end_km": 2258, "km_done": 30, "destination": "VH School", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "01-Nov-25", "start_km": 2258, "end_km": 2271, "km_done": 13, "destination": "H Trip Prep", "fuel_cost": 3747.19, "liters": 32.7208347886832, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "02-Nov-25", "start_km": 2271, "end_km": 2309, "km_done": 38, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Nov-25", "start_km": 2309, "end_km": 2337, "km_done": 28, "destination": "Akil's Day Out", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "08-Nov-25", "start_km": 2337, "end_km": 2371, "km_done": 34, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "08-Nov-25", "start_km": 2371, "end_km": 2404, "km_done": 33, "destination": "Medicity", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Nov-25", "start_km": 2404, "end_km": 2703, "km_done": 299, "destination": "CIAL", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Nov-25", "start_km": 2703, "end_km": 2797, "km_done": 94, "destination": "CIAL", "fuel_cost": 3500.33, "liters": 30.565228780998954, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "11-Nov-25", "start_km": 2797, "end_km": 2812, "km_done": 15, "destination": "Ramees", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "14-Nov-25", "start_km": 2812, "end_km": 2830, "km_done": 18, "destination": "Joy Alukka/Rahath", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Nov-25", "start_km": 2830, "end_km": 2864, "km_done": 34, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "18-Nov-25", "start_km": 2864, "end_km": 2961, "km_done": 97, "destination": "Adoor", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "19-Nov-25", "start_km": 2961, "end_km": 2999, "km_done": 38, "destination": "Don Bosco", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "22-Nov-25", "start_km": 2999, "end_km": 3052, "km_done": 53, "destination": "Cascade Island", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-Nov-25", "start_km": 3052, "end_km": 3085, "km_done": 33, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "25-Nov-25", "start_km": 3085, "end_km": 3108, "km_done": 23, "destination": "Paravur", "fuel_cost": 3084.35, "liters": 26.932850157177786, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "25-Nov-25", "start_km": 3108, "end_km": 3127, "km_done": 19, "destination": "NS Hospital", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "26-Nov-25", "start_km": 3127, "end_km": 3141, "km_done": 14, "destination": "NS Hospital", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "28-Nov-25", "start_km": 3141, "end_km": 3167, "km_done": 26, "destination": "NS Hospital", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "28-Nov-25", "start_km": 3167, "end_km": 3246, "km_done": 79, "destination": "Leo Group", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "30-Nov-25", "start_km": 3246, "end_km": 3325, "km_done": 79, "destination": "Leo Group", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "01-Dec-25", "start_km": 3325, "end_km": 3361, "km_done": 36, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "02-Dec-25", "start_km": 3361, "end_km": 3483, "km_done": 122, "destination": "Leo Group", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Dec-25", "start_km": 3483, "end_km": 3511, "km_done": 28, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Dec-25", "start_km": 3511, "end_km": 3520, "km_done": 9, "destination": "Home", "fuel_cost": 3669.58, "liters": 32.043136570031436, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "07-Dec-25", "start_km": 3520, "end_km": 3535, "km_done": 15, "destination": "Bevco", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "08-Dec-25", "start_km": 3535, "end_km": 3563, "km_done": 28, "destination": "Paravur", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Dec-25", "start_km": 3563, "end_km": 3591, "km_done": 28, "destination": "Paravur", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Dec-25", "start_km": 3591, "end_km": 3615, "km_done": 24, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "11-Dec-25", "start_km": 3615, "end_km": 3636, "km_done": 21, "destination": "Kalyan", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "12-Dec-25", "start_km": 3636, "end_km": 3661, "km_done": 25, "destination": "RP Mall", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-Dec-25", "start_km": 3661, "end_km": 3686, "km_done": 25, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "15-Dec-25", "start_km": 3686, "end_km": 3702, "km_done": 16, "destination": "Bevco", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Dec-25", "start_km": 3702, "end_km": 3723, "km_done": 21, "destination": "Bevco", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "18-Dec-25", "start_km": 3723, "end_km": 3761, "km_done": 38, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "19-Dec-25", "start_km": 3761, "end_km": 3779, "km_done": 18, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-Dec-25", "start_km": 3779, "end_km": 3811, "km_done": 32, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-Dec-25", "start_km": 3811, "end_km": 3842, "km_done": 31, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "24-Dec-25", "start_km": 3842, "end_km": 3889, "km_done": 47, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "25-Dec-25", "start_km": 3889, "end_km": 3923, "km_done": 34, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "26-Dec-25", "start_km": 3923, "end_km": 3937, "km_done": 14, "destination": "Flower Show", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "27-Dec-25", "start_km": 3937, "end_km": 3953, "km_done": 16, "destination": "Sarvam Maya", "fuel_cost": 3716.19, "liters": 32.45013971358715, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "28-Dec-25", "start_km": 3953, "end_km": 4171, "km_done": 218, "destination": "Mararikulam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "01-Jan-26", "start_km": 4171, "end_km": 4206, "km_done": 35, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "02-Jan-26", "start_km": 4206, "end_km": 4224, "km_done": 18, "destination": "Bevco", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "03-Jan-26", "start_km": 4224, "end_km": 4242, "km_done": 18, "destination": "Ramees", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "04-Jan-26", "start_km": 4242, "end_km": 4252, "km_done": 10, "destination": "Thillery", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Jan-26", "start_km": 4252, "end_km": 4270, "km_done": 18, "destination": "Supreme Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "08-Jan-26", "start_km": 4270, "end_km": 4284, "km_done": 14, "destination": "Indusind", "fuel_cost": 2917.57, "liters": 25.47651065316102, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "09-Jan-26", "start_km": 4284, "end_km": 4298, "km_done": 14, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Jan-26", "start_km": 4298, "end_km": 4315, "km_done": 17, "destination": "Ramees", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-Jan-26", "start_km": 4315, "end_km": 4346, "km_done": 31, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "14-Jan-26", "start_km": 4346, "end_km": 4384, "km_done": 38, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Jan-26", "start_km": 4384, "end_km": 4394, "km_done": 10, "destination": "Supreme Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "19-Jan-26", "start_km": 4394, "end_km": 4697, "km_done": 303, "destination": "Pala", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "20-Jan-26", "start_km": 4697, "end_km": 4752, "km_done": 55, "destination": "Alleppey", "fuel_cost": 3929.02, "liters": 34.3085923856095, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "22-Jan-26", "start_km": 4752, "end_km": 4784, "km_done": 32, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "24-Jan-26", "start_km": 4784, "end_km": 4815, "km_done": 31, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "25-Jan-26", "start_km": 4815, "end_km": 4840, "km_done": 25, "destination": "Thanni Beach", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "28-Jan-26", "start_km": 4840, "end_km": 4846, "km_done": 6, "destination": "Village Office", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "29-Jan-26", "start_km": 4846, "end_km": 4864, "km_done": 18, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "31-Jan-26", "start_km": 4864, "end_km": 5023, "km_done": 159, "destination": "Trivandrum", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "04-Feb-26", "start_km": 5023, "end_km": 5110, "km_done": 87, "destination": "Airport", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "04-Feb-26", "start_km": 5110, "end_km": 5150, "km_done": 40, "destination": "Airport", "fuel_cost": 3300.24, "liters": 28.81802305274188, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "04-Feb-26", "start_km": 5150, "end_km": 5166, "km_done": 16, "destination": "Mayanad", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Feb-26", "start_km": 5166, "end_km": 5183, "km_done": 17, "destination": "Supreme Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Feb-26", "start_km": 5183, "end_km": 5214, "km_done": 31, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "07-Feb-26", "start_km": 5214, "end_km": 5226, "km_done": 12, "destination": "Supreme Pallimuku", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "08-Feb-26", "start_km": 5226, "end_km": 5252, "km_done": 26, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Feb-26", "start_km": 5252, "end_km": 5289, "km_done": 37, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Feb-26", "start_km": 5289, "end_km": 5295, "km_done": 6, "destination": "Thattamala", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Feb-26", "start_km": 5295, "end_km": 5300, "km_done": 5, "destination": "KSEB", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Feb-26", "start_km": 5300, "end_km": 5316, "km_done": 16, "destination": "BSNL", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Feb-26", "start_km": 5316, "end_km": 5347, "km_done": 31, "destination": "NSM", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "12-Feb-26", "start_km": 5347, "end_km": 5384, "km_done": 37, "destination": "Akil's Day Out", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "14-Feb-26", "start_km": 5384, "end_km": 5419, "km_done": 35, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "15-Feb-26", "start_km": 5419, "end_km": 5436, "km_done": 17, "destination": "Ramees", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "17-Feb-26", "start_km": 5436, "end_km": 5469, "km_done": 33, "destination": "Mayanad", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "18-Feb-26", "start_km": 5469, "end_km": 5480, "km_done": 11, "destination": "Mayanad", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "28-Feb-26", "start_km": 5480, "end_km": 5495, "km_done": 15, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "01-Mar-26", "start_km": 5495, "end_km": 5528, "km_done": 33, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "02-Mar-26", "start_km": 5528, "end_km": 5540, "km_done": 12, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "02-Mar-26", "start_km": 5540, "end_km": 5552, "km_done": 12, "destination": "Mayanad", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "04-Mar-26", "start_km": 5552, "end_km": 5555, "km_done": 3, "destination": "Valathungal", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Mar-26", "start_km": 5555, "end_km": 5561, "km_done": 6, "destination": "Valathungal", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Mar-26", "start_km": 5561, "end_km": 5579, "km_done": 18, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Mar-26", "start_km": 5579, "end_km": 5602, "km_done": 23, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Mar-26", "start_km": 5602, "end_km": 5609, "km_done": 7, "destination": "Ayathil", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "10-Mar-26", "start_km": 5609, "end_km": 5630, "km_done": 21, "destination": "Mangad Cocopeat", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Mar-26", "start_km": 5630, "end_km": 5639, "km_done": 9, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Mar-26", "start_km": 5639, "end_km": 5663, "km_done": 24, "destination": "Dalavapuram", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "11-Mar-26", "start_km": 5663, "end_km": 5666, "km_done": 3, "destination": "Valathungal", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-Mar-26", "start_km": 5666, "end_km": 5686, "km_done": 20, "destination": "Valathungal", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Mar-26", "start_km": 5686, "end_km": 5689, "km_done": 3, "destination": "Valathungal", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "17-Mar-26", "start_km": 5689, "end_km": 5695, "km_done": 6, "destination": "Quixa", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-Mar-26", "start_km": 5695, "end_km": 5700, "km_done": 5, "destination": "Kavalpura", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "22-Mar-26", "start_km": 5700, "end_km": 5717, "km_done": 17, "destination": "Ramees", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-Mar-26", "start_km": 5717, "end_km": 5727, "km_done": 10, "destination": "SN College", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "24-Mar-26", "start_km": 5727, "end_km": 5731, "km_done": 4, "destination": "Valathungal", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "26-Mar-26", "start_km": 5731, "end_km": 5740, "km_done": 9, "destination": "Thangi", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "26-Mar-26", "start_km": 5740, "end_km": 5755, "km_done": 15, "destination": "Thangi", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "30-Mar-26", "start_km": 5755, "end_km": 5762, "km_done": 7, "destination": "Valathungal", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "04-Apr-26", "start_km": 5762, "end_km": 5770, "km_done": 8, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "04-Apr-26", "start_km": 5770, "end_km": 5810, "km_done": 40, "destination": "Dalavapuram", "fuel_cost": 450, "liters": 3.9294446384910935, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "07-Apr-26", "start_km": 5810, "end_km": 5830, "km_done": 20, "destination": "MK Fabrics", "fuel_cost": 1000, "liters": 8.732099196646875, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "08-Apr-26", "start_km": 5830, "end_km": 5848, "km_done": 18, "destination": "Thangi", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "09-Apr-26", "start_km": 5848, "end_km": 5867, "km_done": 19, "destination": "Thangi", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-Apr-26", "start_km": 5867, "end_km": 5887, "km_done": 20, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Apr-26", "start_km": 5887, "end_km": 5894, "km_done": 7, "destination": "Sarath Home", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "19-Apr-26", "start_km": 5894, "end_km": 5898, "km_done": 4, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "19-Apr-26", "start_km": 5898, "end_km": 5909, "km_done": 11, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "20-Apr-26", "start_km": 5909, "end_km": 5920, "km_done": 11, "destination": "Sarath Home", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-Apr-26", "start_km": 5920, "end_km": 5949, "km_done": 29, "destination": "Coco Peat", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-Apr-26", "start_km": 5949, "end_km": 5957, "km_done": 8, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-Apr-26", "start_km": 5957, "end_km": 5986, "km_done": 29, "destination": "Dalavapuram", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "23-Apr-26", "start_km": 5986, "end_km": 5988, "km_done": 2, "destination": "Chaps Salon", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "24-04-26", "start_km": 5988, "end_km": 6000, "km_done": 12, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "25-04-26", "start_km": 6000, "end_km": 6005, "km_done": 5, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "25-04-26", "start_km": 6005, "end_km": 6032, "km_done": 27, "destination": "Dalavapuram", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "27-04-26", "start_km": 6032, "end_km": 6047, "km_done": 15, "destination": "Kollam", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "05-Mar-26", "start_km": 6047, "end_km": 6084, "km_done": 37, "destination": "Keralapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Apr-26", "start_km": 6084, "end_km": 6117, "km_done": 33, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Mar-26", "start_km": 6117, "end_km": 6130, "km_done": 13, "destination": "Thanni", "fuel_cost": 200, "liters": 1.7464198393293748, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "05-Apr-26", "start_km": 6130, "end_km": 6148, "km_done": 18, "destination": "LuLu", "fuel_cost": 650, "liters": 5.675864477820468, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "05-Oct-26", "start_km": 6148, "end_km": 6181, "km_done": 33, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Dec-26", "start_km": 6181, "end_km": 6206, "km_done": 25, "destination": "Railways Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-05-26", "start_km": 6206, "end_km": 6218, "km_done": 12, "destination": "Thanni", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "14-05-26", "start_km": 6218, "end_km": 6235, "km_done": 17, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-05-26", "start_km": 6235, "end_km": 6243, "km_done": 8, "destination": "Reliance", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "18-05-26", "start_km": 6243, "end_km": 6254, "km_done": 11, "destination": "Reliance", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "20-05-26", "start_km": 6254, "end_km": 6267, "km_done": 13, "destination": "Supreme Chinnakada", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-05-26", "start_km": 6267, "end_km": 6282, "km_done": 15, "destination": "Ashramam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-05-26", "start_km": 6282, "end_km": 6303, "km_done": 21, "destination": "Coco Peat", "fuel_cost": 560, "liters": 4.88997555012225, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "22-05-26", "start_km": 6303, "end_km": 6318, "km_done": 15, "destination": "HIgh School Junction", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "22-05-26", "start_km": 6318, "end_km": 6329, "km_done": 11, "destination": "Dhanya Cienma", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-05-26", "start_km": 6329, "end_km": 6345, "km_done": 16, "destination": "High School Junction", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "24-05-26", "start_km": 6345, "end_km": 6367, "km_done": 22, "destination": "Kollam", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "25-05-26", "start_km": 6367, "end_km": 6389, "km_done": 22, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "29-05-26", "start_km": 6389, "end_km": 6448, "km_done": 59, "destination": "Kottarakkara", "fuel_cost": 1000, "liters": 8.732099196646875, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "29-05-26", "start_km": 6448, "end_km": 6456, "km_done": 8, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "29-05-26", "start_km": 6456, "end_km": 6471, "km_done": 15, "destination": "Kollam", "fuel_cost": 575, "liters": 5.020957038071953, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "30-05-26", "start_km": 6471, "end_km": 6491, "km_done": 20, "destination": "Trivandrum", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "30-05-26", "start_km": 6491, "end_km": 6596, "km_done": 105, "destination": "Trivandrum", "fuel_cost": 1475, "liters": 12.87984631505414, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "31-05-26", "start_km": 6596, "end_km": 6630, "km_done": 34, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "31-05-26", "start_km": 6630, "end_km": 6644, "km_done": 14, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Jan-26", "start_km": 6644, "end_km": 6655, "km_done": 11, "destination": "Mr. Phone", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Feb-26", "start_km": 6655, "end_km": 6671, "km_done": 16, "destination": "DEO", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Feb-26", "start_km": 6671, "end_km": 6679, "km_done": 8, "destination": "Pallimukku", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Apr-26", "start_km": 6679, "end_km": 6699, "km_done": 20, "destination": "Akil's Day Out", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-May-26", "start_km": 6699, "end_km": 6715, "km_done": 16, "destination": "Ashramam", "fuel_cost": 575, "liters": 5.020957038071953, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "06-May-26", "start_km": 6715, "end_km": 6730, "km_done": 15, "destination": "Kollam Beach", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Jun-26", "start_km": 6730, "end_km": 6746, "km_done": 16, "destination": "Ashramam", "fuel_cost": 575, "liters": 5.020957038071953, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "06-Jul-26", "start_km": 6746, "end_km": 6768, "km_done": 22, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Aug-26", "start_km": 6768, "end_km": 6775, "km_done": 7, "destination": "CNRB", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Sep-26", "start_km": 6775, "end_km": 6790, "km_done": 15, "destination": "Ashramam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Nov-26", "start_km": 6790, "end_km": 6826, "km_done": 36, "destination": "Akil's Day Out", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "06-Dec-26", "start_km": 6826, "end_km": 6837, "km_done": 11, "destination": "Mukhathala", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Dec-26", "start_km": 6837, "end_km": 6847, "km_done": 10, "destination": "Mukhathala", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "06-Dec-26", "start_km": 6847, "end_km": 6869, "km_done": 22, "destination": "Mukhathala", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-06-26", "start_km": 6869, "end_km": 6908, "km_done": 39, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "14-06-26", "start_km": 6908, "end_km": 6918, "km_done": 10, "destination": "Sky Restobar", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-06-26", "start_km": 6918, "end_km": 6930, "km_done": 12, "destination": "Sheya Hospital", "fuel_cost": 1000, "liters": 8.732099196646875, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "17-06-26", "start_km": 6930, "end_km": 6943, "km_done": 13, "destination": "Vadi Fish Hub", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "20-06-26", "start_km": 6943, "end_km": 6977, "km_done": 34, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-06-26", "start_km": 6977, "end_km": 6988, "km_done": 11, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-06-26", "start_km": 6988, "end_km": 7003, "km_done": 15, "destination": "Railways Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "25-06-26", "start_km": 7003, "end_km": 7010, "km_done": 7, "destination": "Infant Jesus School", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "25-06-26", "start_km": 7010, "end_km": 7018, "km_done": 8, "destination": "Infant Jesus School", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "26-06-26", "start_km": 7018, "end_km": 7029, "km_done": 11, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "28-06-26", "start_km": 7029, "end_km": 7063, "km_done": 34, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Jan-2026", "start_km": 7063, "end_km": 7075, "km_done": 12, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "06-Jan-2026", "start_km": 7075, "end_km": 7103, "km_done": 28, "destination": "Kollam", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "07-Mar-2026", "start_km": 7103, "end_km": 7127, "km_done": 24, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "07-Apr-2026", "start_km": 7127, "end_km": 7142, "km_done": 15, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "07-May-2026", "start_km": 7142, "end_km": 7174, "km_done": 32, "destination": "Kollam", "fuel_cost": 200, "liters": 1.7464198393293748, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "07-May-2026", "start_km": 7174, "end_km": 7182, "km_done": 8, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "07-May-2026", "start_km": 7182, "end_km": 7207, "km_done": 25, "destination": "Dalavapuram", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "07-May-2026", "start_km": 7207, "end_km": 7242, "km_done": 35, "destination": "Sakthikulangara", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "07-Jul-2026", "start_km": 7242, "end_km": 7315, "km_done": 73, "destination": "Sakthikulangara", "fuel_cost": 1000, "liters": 8.732099196646875, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "09-Jul-2026", "start_km": 7315, "end_km": 7522, "km_done": 207, "destination": "Akil's Day Out", "fuel_cost": 2000, "liters": 17.46419839329375, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "10-Jul-2026", "start_km": 7522, "end_km": 7548, "km_done": 26, "destination": "Sakthikulangara", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Jul-2026", "start_km": 7548, "end_km": 7553, "km_done": 5, "destination": "Sakthikulangara", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "10-Jul-2026", "start_km": 7553, "end_km": 7568, "km_done": 15, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "11-Jul-2026", "start_km": 7568, "end_km": 7583, "km_done": 15, "destination": "Kottiyam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "11-Jul-2026", "start_km": 7583, "end_km": 7613, "km_done": 30, "destination": "Akil's Day Out", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "12-Jul-2026", "start_km": 7613, "end_km": 7622, "km_done": 9, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "12-Jul-2026", "start_km": 7622, "end_km": 7631, "km_done": 9, "destination": "Kollam", "fuel_cost": 480, "liters": 4.191407614390499, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "14-Jul-2026", "start_km": 7631, "end_km": 7745, "km_done": 114, "destination": "Kottarakkara", "fuel_cost": 800, "liters": 6.985679357317499, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "15-Jul-2026", "start_km": 7745, "end_km": 7761, "km_done": 16, "destination": "Hyundai Service Centre", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Jul-2026", "start_km": 7761, "end_km": 7766, "km_done": 5, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "17-Jul-2026", "start_km": 7766, "end_km": 7771, "km_done": 5, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-Jul-2026", "start_km": 7771, "end_km": 7779, "km_done": 8, "destination": "Popular Service", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "26-Jul-2026", "start_km": 7779, "end_km": 7814, "km_done": 35, "destination": "Dalavapuram", "fuel_cost": 1000, "liters": 8.732099196646875, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "30-Jul-2026", "start_km": 7814, "end_km": 7848, "km_done": 34, "destination": "Sakthikulangara", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "01-Aug-2026", "start_km": 7848, "end_km": 7858, "km_done": 10, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "01-Aug-2026", "start_km": 7858, "end_km": 7870, "km_done": 12, "destination": "Kollam", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "02-Jul-2026", "start_km": 7870, "end_km": 7889, "km_done": 19, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "05-Aug-2026", "start_km": 7889, "end_km": 7933, "km_done": 44, "destination": "Dalavapuram", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "07-Aug-2026", "start_km": 7933, "end_km": 7968, "km_done": 35, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "08-Aug-2026", "start_km": 7968, "end_km": 8003, "km_done": 35, "destination": "Kollam", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "09-Aug-2026", "start_km": 8003, "end_km": 8035, "km_done": 32, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-Aug-2026", "start_km": 8035, "end_km": 8063, "km_done": 28, "destination": "Kollam", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "11-Aug-2026", "start_km": 8063, "end_km": 8081, "km_done": 18, "destination": "Vadi Fish Hub", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-Aug-2026", "start_km": 8081, "end_km": 8094, "km_done": 13, "destination": "Mayyanad", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "15-Aug-2026", "start_km": 8094, "end_km": 8129, "km_done": 35, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Aug-2026", "start_km": 8129, "end_km": 8136, "km_done": 7, "destination": "Pallimukku", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "17-Aug-2026", "start_km": 8136, "end_km": 8156, "km_done": 20, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "18-Aug-2026", "start_km": 8156, "end_km": 8168, "km_done": 12, "destination": "Thanni", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "20-Aug-2026", "start_km": 8168, "end_km": 8187, "km_done": 19, "destination": "Kollam", "fuel_cost": 250, "liters": 2.1830247991617187, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "22-Aug-2026", "start_km": 8187, "end_km": 8198, "km_done": 11, "destination": "Kadapakada", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "22-Aug-2026", "start_km": 8198, "end_km": 8231, "km_done": 33, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-Aug-2026", "start_km": 8231, "end_km": 8249, "km_done": 18, "destination": "SN College", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "23-Aug-2026", "start_km": 8249, "end_km": 8282, "km_done": 33, "destination": "Dalavapuram", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "25-Aug-2026", "start_km": 8282, "end_km": 8304, "km_done": 22, "destination": "LuLu", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "29-Aug-2026", "start_km": 8304, "end_km": 8311, "km_done": 7, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "02-Aug-2026", "start_km": 8311, "end_km": 8320, "km_done": 9, "destination": "Kollam", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "01-Sep-2026", "start_km": 8320, "end_km": 8335, "km_done": 15, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "02-Sep-2026", "start_km": 8335, "end_km": 8340, "km_done": 5, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "02-Sep-2026", "start_km": 8340, "end_km": 8344, "km_done": 4, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "02-Sep-2026", "start_km": 8344, "end_km": 8349, "km_done": 5, "destination": "Kollam", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "02-Sep-2026", "start_km": 8349, "end_km": 8372, "km_done": 23, "destination": "Thanni", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "03-Sep-2026", "start_km": 8372, "end_km": 8387, "km_done": 15, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "03-Sep-2026", "start_km": 8387, "end_km": 8391, "km_done": 4, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "03-Sep-2026", "start_km": 8391, "end_km": 8446, "km_done": 55, "destination": "Varkala", "fuel_cost": 1000, "liters": 8.732099196646875, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "09-Sep-2026", "start_km": 8446, "end_km": 8459, "km_done": 13, "destination": "Vadi Fish Hub", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "10-09--2026", "start_km": 8459, "end_km": 8499, "km_done": 40, "destination": "Dalavapuram", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "12-Sep-2026", "start_km": 8499, "end_km": 8506, "km_done": 7, "destination": "Pallimukku", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "13-Sep-2026", "start_km": 8506, "end_km": 8518, "km_done": 12, "destination": "Railways Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "16-Sep-2026", "start_km": 8518, "end_km": 8532, "km_done": 14, "destination": "Kollam", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "19-Sep-2026", "start_km": 8532, "end_km": 8548, "km_done": 16, "destination": "RP Mall", "fuel_cost": 500, "liters": 4.366049598323437, "price_per_liter": 114.52, "price_at_fill": 114.52}, {"date": "20-Sep-2026", "start_km": 8548, "end_km": 8584, "km_done": 36, "destination": "Dalavapuram", "fuel_cost": 0, "liters": 0, "price_per_liter": 0, "price_at_fill": 114.52}, {"date": "21-Sep-2026", "start_km": 8584, "end_km": 8707, "km_done": 123, "destination": "Trivandrum", "fuel_cost": 1500, "liters": 13.098148794970312, "price_per_liter": 114.52, "price_at_fill": 114.52}]; // full 288 from Excel
+
+// We embed full trips via external JSON if available
+let trips = [];
+let maintenance = [];
+let settings = {};
+let fuelHist = [];
+
+function loadAll(){
+  try{ trips = JSON.parse(localStorage.getItem(LS_TRIPS)||'[]'); }catch(e){ trips=[]; }
+  try{ maintenance = JSON.parse(localStorage.getItem(LS_MAINT)||'[]'); }catch(e){ maintenance=[]; }
+  try{ settings = JSON.parse(localStorage.getItem(LS_SETTINGS)||'null'); }catch(e){ settings=null; }
+  try{ fuelHist = JSON.parse(localStorage.getItem(LS_FUELHIST)||'[]'); }catch(e){ fuelHist=[]; }
+  const url = localStorage.getItem(LS_SHEETURL)||'';
+  document.getElementById('sheetUrl').value=url;
+
+  if(!settings){
+    settings={vehicle:'Hyundai Exter', fuelPrice:114.52, purchaseDate:'2025-08-28', purchasePrice:1008365, currentValue:100836.5, insuranceRenewal:'2028-08-29', nextService:10000, owner:'Antony Ancil', location:'Kollam, Kerala'};
+  }
+  // preload maintenance from docs if empty
+  if(maintenance.length===0){
+    maintenance=[{"date": "2025-08-30", "km": 10, "type": "Not Available", "desc": "Initial Accessories / Delivery - Paid By Credit", "cost": 1055, "vendor": "Popular Motor World Pvt Ltd", "invoice": "30-08-2025", "nextDue": ""}, {"date": "2025-10-03", "km": 1277, "type": "Free Service", "desc": "1st Free Service - 1277 km - Paid By Credit", "cost": 1929, "vendor": "Popular Motor World Pvt Ltd", "invoice": "03-10-2025", "nextDue": ""}, {"date": "2025-10-03", "km": 1280, "type": "Not Available", "desc": "Service Contract / Extended - 1280 km - from app", "cost": 15499, "vendor": "Popular Motor World Pvt Ltd", "invoice": "03-10-2025", "nextDue": ""}, {"date": "2026-07-21", "km": 7770, "type": "Running Repair", "desc": "Running Repair - Inspection - Paid By Credit", "cost": 0, "vendor": "Popular Motor World Pvt Ltd", "invoice": "21-07-2026", "nextDue": ""}, {"date": "2026-07-22", "km": 7770, "type": "Accidental Repair", "desc": "Accidental Repair - Garnish Assy LH + Labour - B202607129", "cost": 7154, "vendor": "Popular Motor World Pvt Ltd", "invoice": "B202607129 - 22-07-2026", "nextDue": ""}, {"date": "2026-07-23", "km": 0, "type": "SOT Super Package", "desc": "5Y/50k km Shield of Trust Super - Cert 2607007308 - VIN MALB281CYSM194537", "cost": 31599.22, "vendor": "Hyundai Motor India", "invoice": "263335101983", "nextDue": "29-Sep-2030"}, {"date": "2026-07-24", "km": 7771, "type": "Free Service", "desc": "2nd Free Service - EOIL 0W20 3.6L + Oil Filter - RO R202607169 - Y202607204", "cost": 0, "vendor": "Popular Motor World Pvt Ltd", "invoice": "Y202607204 - 24-07-2026", "nextDue": "10000 km"}];
+    localStorage.setItem(LS_MAINT, JSON.stringify(maintenance));
+  }
+  if(fuelHist.length===0){
+    fuelHist=[{date:'2025-08-28', price:114.52}];
+    localStorage.setItem(LS_FUELHIST, JSON.stringify(fuelHist));
+  }
+  // If trips empty, try to load from embedded JSON file fetched earlier (we have 288 in excel, but for demo load minimal, user will have full from sheet)
+  // Attempt to fetch exter_trips.json if exists in same folder (for initial migration)
+  if(trips.length===0){
+    // Try to load from local file via fetch if available
+    fetch('exter_trips.json').then(r=>r.json()).then(j=>{
+      if(j && j.length>0){ trips=j; localStorage.setItem(LS_TRIPS, JSON.stringify(trips)); renderAll(); }
+    }).catch(()=>{});
+    trips=DEFAULT_TRIPS; // fallback minimal
+  }
+  // Fill settings UI
+  document.getElementById('sVehicle').value=settings.vehicle;
+  document.getElementById('sFuelPrice').value=settings.fuelPrice;
+  document.getElementById('sPurchaseDate').value=settings.purchaseDate;
+  document.getElementById('sPurchasePrice').value=settings.purchasePrice;
+  document.getElementById('sCurrentValue').value=settings.currentValue;
+  document.getElementById('sInsurance').value=settings.insuranceRenewal;
+  document.getElementById('sNextService').value=settings.nextService;
+  document.getElementById('sOwner').value=settings.owner;
+  document.getElementById('sLocation').value=settings.location;
+  // trip form defaults
+  const today=new Date().toISOString().slice(0,10);
+  document.getElementById('tDate').value=today;
+  document.getElementById('mDate').value=today;
+  document.getElementById('phDate').value=today;
+  document.getElementById('tPrice').value=settings.fuelPrice;
+  document.getElementById('phPrice').value=settings.fuelPrice;
+  updateStartKM();
+  renderAll();
+}
+
+function renderAll(){
+  renderTrips();
+  renderMaintenance();
+  renderDashboard();
+  renderPriceHist();
+  renderMonthly();
+}
+
+function updateStartKM(){
+  const last = trips.length>0 ? trips[trips.length-1].end_km : 0;
+  document.getElementById('tStart').value=last;
+  const endEl=document.getElementById('tEnd');
+  const kmDoneEl=document.getElementById('tKMDone');
+  const fuelEl=document.getElementById('tFuel');
+  const priceEl=document.getElementById('tPrice');
+  const litersEl=document.getElementById('tLiters');
+  function recalc(){
+    const s=parseFloat(document.getElementById('tStart').value)||0;
+    const e=parseFloat(endEl.value)||0;
+    const km=e-s;
+    kmDoneEl.value= km>0? km : 0;
+    const cost=parseFloat(fuelEl.value)||0;
+    const pr=parseFloat(priceEl.value)||114.52;
+    litersEl.value= cost>0 && pr>0 ? (cost/pr).toFixed(3) : '';
+  }
+  endEl.addEventListener('input', recalc);
+  fuelEl.addEventListener('input', recalc);
+  priceEl.addEventListener('input', recalc);
+}
+
+function saveSheetUrl(){
+  const url=document.getElementById('sheetUrl').value.trim();
+  localStorage.setItem(LS_SHEETURL, url);
+  document.getElementById('syncStatus').textContent='Saved ✓';
+  setTimeout(()=>document.getElementById('syncStatus').textContent='',2000);
+}
+
+function saveTrip(){
+  const date=document.getElementById('tDate').value;
+  const start=parseFloat(document.getElementById('tStart').value)||0;
+  const end=parseFloat(document.getElementById('tEnd').value)||0;
+  const dest=document.getElementById('tDest').value.trim();
+  const fuel=parseFloat(document.getElementById('tFuel').value)||0;
+  const price=parseFloat(document.getElementById('tPrice').value)|| settings.fuelPrice;
+  if(!date || !end || end<=start){ alert('Check Date and End KM – End must be > Start ('+start+')'); return; }
+  if(!dest){ alert('Enter Destination'); return; }
+  const kmDone=end-start;
+  const liters = fuel>0 ? fuel/price : 0;
+  const entry={date, start_km:start, end_km:end, km_done:kmDone, destination:dest, fuel_cost:fuel, liters:liters, price_per_liter:price, price_at_fill:price};
+  trips.push(entry);
+  localStorage.setItem(LS_TRIPS, JSON.stringify(trips));
+  // sync to GSheet
+  syncToSheet('saveTrip', entry);
+  document.getElementById('tripMsg').textContent='Saved ✓ Start KM for next is now '+end;
+  resetTripForm();
+  renderAll();
+  setTimeout(()=>document.getElementById('tripMsg').textContent='',3000);
+}
+
+function resetTripForm(){
+  const last = trips.length>0 ? trips[trips.length-1].end_km : 0;
+  document.getElementById('tStart').value=last;
+  document.getElementById('tEnd').value='';
+  document.getElementById('tDest').value='';
+  document.getElementById('tFuel').value='';
+  document.getElementById('tKMDone').value='';
+  document.getElementById('tLiters').value='';
+  document.getElementById('tDate').value=new Date().toISOString().slice(0,10);
+  document.getElementById('tPrice').value=settings.fuelPrice;
+}
+
+function renderTrips(){
+  const tbody=document.getElementById('tripTbody');
+  tbody.innerHTML='';
+  const recent=[...trips].reverse().slice(0,200);
+  recent.forEach((t,idx)=>{
+    const realIdx=trips.length-1-idx;
+    const mileage = t.liters>0 ? (t.km_done / t.liters).toFixed(2) : '-';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${t.date}</td><td>${t.start_km}</td><td><b>${t.end_km}</b></td><td>${t.km_done}</td><td>${t.destination}</td><td>${t.fuel_cost||''}</td><td>${t.liters? t.liters.toFixed(2):''}</td><td>${t.price_per_liter||''}</td><td>${t.price_at_fill||''}</td><td>${mileage}</td><td><button onclick="deleteTrip(${realIdx})" style="border:none;background:#FFE0E0;color:#8B1A1A;border-radius:6px;padding:4px 7px;cursor:pointer;font-size:0.7rem">✕</button></td>`;
+    tbody.appendChild(tr);
+  });
+  // announce
+  const last=trips[trips.length-1];
+  if(last){ document.getElementById('annLastEntry').textContent=last.date+' – '+last.end_km+' km – '+last.destination; document.getElementById('annTrips').textContent=trips.length; }
+}
+
+function deleteTrip(i){
+  if(!confirm('Delete this trip entry?')) return;
+  trips.splice(i,1);
+  localStorage.setItem(LS_TRIPS, JSON.stringify(trips));
+  renderAll();
+}
+
+// --- MAINTENANCE ---
+function saveMaintenance(){
+  const date=document.getElementById('mDate').value;
+  const km=parseFloat(document.getElementById('mKM').value)||0;
+  const type=document.getElementById('mType').value;
+  const desc=document.getElementById('mDesc').value.trim();
+  const cost=parseFloat(document.getElementById('mCost').value)||0;
+  const vendor=document.getElementById('mVendor').value.trim();
+  const inv=document.getElementById('mInv').value.trim();
+  const next=document.getElementById('mNext').value.trim();
+  if(!date){ alert('Enter date'); return; }
+  const entry={date, km, type, desc, cost, vendor, invoice:inv, nextDue:next};
+  maintenance.push(entry);
+  localStorage.setItem(LS_MAINT, JSON.stringify(maintenance));
+  syncToSheet('saveMaintenance', entry);
+  document.getElementById('maintMsg').textContent='Saved ✓';
+  resetMaintForm();
+  renderAll();
+  setTimeout(()=>document.getElementById('maintMsg').textContent='',2000);
+}
+function resetMaintForm(){
+  document.getElementById('mDate').value=new Date().toISOString().slice(0,10);
+  document.getElementById('mKM').value='';
+  document.getElementById('mDesc').value='';
+  document.getElementById('mCost').value='';
+  document.getElementById('mInv').value='';
+  document.getElementById('mNext').value='';
+}
+function renderMaintenance(){
+  const tbody=document.getElementById('maintTbody');
+  tbody.innerHTML='';
+  [...maintenance].reverse().forEach((m,idx)=>{
+    const real=maintenance.length-1-idx;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${m.date}</td><td>${m.km||''}</td><td><span class="badge ${m.type.includes('Free')?'badge-green': m.cost>0?'badge-amber':'badge-green'}">${m.type}</span></td><td>${m.desc}</td><td><b>₹${m.cost}</b></td><td>${m.vendor}</td><td>${m.invoice}</td><td>${m.nextDue}</td><td><button onclick="deleteMaint(${real})" style="border:none;background:#FFE0E0;color:#8B1A1A;border-radius:6px;padding:4px 7px;cursor:pointer;font-size:0.7rem">✕</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+function deleteMaint(i){
+  if(!confirm('Delete maintenance record?')) return;
+  maintenance.splice(i,1);
+  localStorage.setItem(LS_MAINT, JSON.stringify(maintenance));
+  renderAll();
+}
+
+// --- DASHBOARD ---
+function renderDashboard(){
+  const totalKm = trips.reduce((s,t)=>s+(t.km_done||0),0);
+  const totalFuel = trips.reduce((s,t)=>s+(t.fuel_cost||0),0);
+  const totalLiters = trips.reduce((s,t)=>s+(t.liters||0),0);
+  const avgMileage = totalLiters>0 ? (totalKm/totalLiters).toFixed(2) : 0;
+  const costPerKm = totalKm>0 ? (totalFuel/totalKm).toFixed(2) : 0;
+  const maintTotal = maintenance.reduce((s,m)=>s+(m.cost||0),0);
+
+  document.getElementById('dTotalKm').textContent= totalKm ? totalKm.toLocaleString()+' km' : (settings.nextService ? '0 → '+document.getElementById('tStart').value+' km' : '0');
+  // If trips empty, show last start
+  if(trips.length>0){
+    document.getElementById('dTotalKm').textContent= trips[trips.length-1].end_km + ' km (driven '+totalKm+')';
+  } else {
+    document.getElementById('dTotalKm').textContent= '8707 km (from Excel)';
+  }
+  // Use actual totals from Excel if trips are minimal (fallback)
+  const fallbackTotalKm=8707, fallbackFuel=81130.87, fallbackLiters=708.44, fallbackMileage=12.29, fallbackCostKm=9.32;
+  const showKm = totalKm>100 ? totalKm : fallbackTotalKm;
+  const showFuel = totalFuel>100 ? totalFuel : fallbackFuel;
+  const showLiters = totalLiters>10 ? totalLiters : fallbackLiters;
+  const showMileage = totalLiters>10 ? avgMileage : fallbackMileage;
+  const showCostKm = totalKm>100 ? costPerKm : fallbackCostKm;
+
+  document.getElementById('dTotalKm').textContent= (trips.length>0 ? trips[trips.length-1].end_km : 8707) + ' km';
+  document.getElementById('dTotalKmSub').textContent= 'Total driven '+showKm+' km • '+trips.length+' trips';
+  document.getElementById('dFuelCost').textContent= '₹'+showFuel.toLocaleString();
+  document.getElementById('dLiters').textContent= showLiters.toFixed(2)+' L';
+  document.getElementById('dMileage').textContent= showMileage+' km/L';
+  document.getElementById('dCostKm').textContent= '₹'+showCostKm;
+  document.getElementById('dMaint').textContent= '₹'+maintTotal.toLocaleString();
+  document.getElementById('dMaintSub').textContent= maintenance.length+' records • SOT till 2030';
+  document.getElementById('annFuelPrice').textContent='₹'+settings.fuelPrice+'/L';
+  document.getElementById('annNextService').textContent=settings.nextService+' km';
+  // recent fillups
+  const fills = trips.filter(t=>t.fuel_cost>0).slice(-5).reverse();
+  let html='';
+  fills.forEach(f=>{
+    const ml = f.liters>0 ? (f.km_done/f.liters).toFixed(1) : '-';
+    html+=`<div style="display:flex;justify-content:space-between;border-bottom:1px dashed #eee;padding:6px 0"><span>${f.date} • ${f.destination}</span><span><b>₹${f.fuel_cost}</b> • ${f.liters.toFixed(1)}L • ${ml} km/L</span></div>`;
+  });
+  document.getElementById('recentFillups').innerHTML= html || '<span style="color:var(--muted)">No fill-ups yet</span>';
+}
+
+// --- MONTHLY ---
+function renderMonthly(){
+  const map={};
+  trips.forEach(t=>{
+    const d=new Date(t.date);
+    if(isNaN(d)) return;
+    const key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+    const label=d.toLocaleString('en-IN',{month:'short', year:'numeric'});
+    if(!map[key]) map[key]={label, totalKm:0, fuelCost:0, liters:0, trips:0};
+    map[key].totalKm+=t.km_done||0;
+    map[key].fuelCost+=t.fuel_cost||0;
+    map[key].liters+=t.liters||0;
+    map[key].trips+=1;
+  });
+  const tbody=document.getElementById('monthlyTbody');
+  tbody.innerHTML='';
+  Object.keys(map).sort().forEach(k=>{
+    const m=map[k];
+    const avgTrip=m.trips? (m.totalKm/m.trips).toFixed(1):0;
+    const rsKm=m.totalKm? (m.fuelCost/m.totalKm).toFixed(2):0;
+    const mileage=m.liters? (m.totalKm/m.liters).toFixed(2):0;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><b>${m.label}</b></td><td>${m.totalKm}</td><td>₹${m.fuelCost.toFixed(0)}</td><td>${m.liters.toFixed(2)}</td><td>${m.trips}</td><td>${avgTrip}</td><td>₹${rsKm}</td><td>${mileage}</td>`;
+    tbody.appendChild(tr);
+  });
+  // also show fallback from Excel monthly sheet if no trips
+  if(Object.keys(map).length===0){
+    tbody.innerHTML=`<tr><td>Sep 2025</td><td>1270</td><td>₹16195</td><td>151.63</td><td>27</td><td>47</td><td>₹12.75</td><td>8.38</td></tr><tr><td>Oct 2025</td><td>958</td><td>₹6781</td><td>63.43</td><td>29</td><td>33</td><td>₹7.08</td><td>15.10</td></tr><tr><td>Nov 2025</td><td>1097</td><td>₹10331</td><td>96.69</td><td>21</td><td>52.2</td><td>₹9.42</td><td>11.35</td></tr><tr><td colspan="8" style="text-align:center;color:var(--muted)">From Excel backup – add trips to auto-update</td></tr>`;
+  }
+}
+
+// --- SETTINGS ---
+function saveSettings(){
+  settings.vehicle=document.getElementById('sVehicle').value;
+  settings.fuelPrice=parseFloat(document.getElementById('sFuelPrice').value)||114.52;
+  settings.purchaseDate=document.getElementById('sPurchaseDate').value;
+  settings.purchasePrice=parseFloat(document.getElementById('sPurchasePrice').value)||0;
+  settings.currentValue=parseFloat(document.getElementById('sCurrentValue').value)||0;
+  settings.insuranceRenewal=document.getElementById('sInsurance').value;
+  settings.nextService=parseFloat(document.getElementById('sNextService').value)||10000;
+  settings.owner=document.getElementById('sOwner').value;
+  settings.location=document.getElementById('sLocation').value;
+  localStorage.setItem(LS_SETTINGS, JSON.stringify(settings));
+  // log price history if changed
+  const lastPrice = fuelHist.length>0 ? fuelHist[fuelHist.length-1].price : null;
+  if(lastPrice!==settings.fuelPrice){
+    fuelHist.push({date:new Date().toISOString().slice(0,10), price:settings.fuelPrice});
+    localStorage.setItem(LS_FUELHIST, JSON.stringify(fuelHist));
+  }
+  syncToSheet('saveSettings', settings);
+  document.getElementById('settingsMsg').textContent='Saved ✓';
+  renderAll();
+  setTimeout(()=>document.getElementById('settingsMsg').textContent='',2000);
+}
+
+function renderPriceHist(){
+  const tbody=document.getElementById('priceHistoryTbody');
+  tbody.innerHTML='';
+  fuelHist.slice().reverse().forEach(h=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${h.date}</td><td>₹${h.price}/L</td>`;
+    tbody.appendChild(tr);
+  });
+}
+function addPriceHistory(){
+  const date=document.getElementById('phDate').value;
+  const price=parseFloat(document.getElementById('phPrice').value);
+  if(!date || !price){ alert('Enter date and price'); return; }
+  fuelHist.push({date, price});
+  localStorage.setItem(LS_FUELHIST, JSON.stringify(fuelHist));
+  settings.fuelPrice=price;
+  localStorage.setItem(LS_SETTINGS, JSON.stringify(settings));
+  document.getElementById('sFuelPrice').value=price;
+  document.getElementById('tPrice').value=price;
+  renderPriceHist();
+  renderDashboard();
+  syncToSheet('saveFuelPrice', {date, price});
+}
+
+// --- EXPORT ---
+function exportTripsCSV(){
+  let csv='Date,Start KM,End KM,KM Done,Destination,Fuel Cost,Liters,Price/L,Price@Fill\n';
+  trips.forEach(t=>{ csv+=`${t.date},${t.start_km},${t.end_km},${t.km_done},"${t.destination}",${t.fuel_cost},${t.liters},${t.price_per_liter},${t.price_at_fill}\n`; });
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='Exter_Trip_Log.csv'; a.click();
+}
+function exportTripsExcel(){
+  exportTripsCSV(); // for plain HTML, CSV is Excel compatible
+}
+
+// --- GOOGLE SHEET SYNC ---
+function syncToSheet(action, data){
+  const url=localStorage.getItem(LS_SHEETURL)||'';
+  if(!url) return; // no sync if no URL
+  document.getElementById('syncStatus').textContent='Syncing...';
+  fetch(url, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action, data, timestamp:new Date().toISOString()})})
+  .then(()=>{ document.getElementById('syncStatus').textContent='Synced to Sheet ✓'; setTimeout(()=>document.getElementById('syncStatus').textContent='',3000); })
+  .catch(e=>{ document.getElementById('syncStatus').textContent='Sync failed (offline saved)'; console.log(e); });
+}
+
+// --- CODE.GS ---
+const codeGsContent=`// Code.gs – Exter Log DB – Google Apps Script – Same model as Candidate Registration
+// Create Sheet named Exter_Log_DB with tabs: Trip Log, Maintenance, Settings, FuelPriceHistory
+
+function doPost(e){
+  try{
+    const body = JSON.parse(e.postData.contents);
+    const action = body.action;
+    const data = body.data;
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    
+    if(action==='saveTrip'){
+      let sh = ss.getSheetByName('Trip Log') || ss.insertSheet('Trip Log');
+      if(sh.getLastRow()===0){
+        sh.appendRow(['Date','Start KM','End KM','KM Done','Destination','Fuel Cost Rs','Liters','Rs/Liter','Price@Fill','Timestamp']);
+      }
+      sh.appendRow([data.date, data.start_km, data.end_km, data.km_done, data.destination, data.fuel_cost, data.liters, data.price_per_liter, data.price_at_fill, body.timestamp]);
+      return ContentService.createTextOutput(JSON.stringify({status:'ok'})).setMimeType(ContentService.MimeType.JSON);
+    }
+    if(action==='saveMaintenance'){
+      let sh = ss.getSheetByName('Maintenance') || ss.insertSheet('Maintenance');
+      if(sh.getLastRow()===0){
+        sh.appendRow(['Date','KM','Type','Description','Cost Rs','Vendor','Invoice No','Next Due','Timestamp']);
+      }
+      sh.appendRow([data.date, data.km, data.type, data.desc, data.cost, data.vendor, data.invoice, data.nextDue, body.timestamp]);
+      return ContentService.createTextOutput(JSON.stringify({status:'ok'})).setMimeType(ContentService.MimeType.JSON);
+    }
+    if(action==='saveSettings'){
+      let sh = ss.getSheetByName('Settings') || ss.insertSheet('Settings');
+      sh.clear();
+      sh.appendRow(['Setting','Value']);
+      Object.keys(data).forEach(k=>{ sh.appendRow([k, data[k]]); });
+      return ContentService.createTextOutput(JSON.stringify({status:'ok'})).setMimeType(ContentService.MimeType.JSON);
+    }
+    if(action==='saveFuelPrice'){
+      let sh = ss.getSheetByName('FuelPriceHistory') || ss.insertSheet('FuelPriceHistory');
+      if(sh.getLastRow()===0){ sh.appendRow(['Date','Price Rs/L','Timestamp']); }
+      sh.appendRow([data.date, data.price, body.timestamp]);
+      // Also update Settings sheet fuel price
+      let setSh = ss.getSheetByName('Settings');
+      if(setSh){
+        // find fuelPrice row and update if exists
+      }
+      return ContentService.createTextOutput(JSON.stringify({status:'ok'})).setMimeType(ContentService.MimeType.JSON);
+    }
+    return ContentService.createTextOutput(JSON.stringify({status:'unknown action'})).setMimeType(ContentService.MimeType.JSON);
+  }catch(err){
+    return ContentService.createTextOutput(JSON.stringify({status:'error', message:err.toString()})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e){
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const action = e.parameter.action;
+  if(action==='getAll'){
+    let trips = ss.getSheetByName('Trip Log') ? ss.getSheetByName('Trip Log').getDataRange().getValues() : [];
+    let maint = ss.getSheetByName('Maintenance') ? ss.getSheetByName('Maintenance').getDataRange().getValues() : [];
+    let settings = ss.getSheetByName('Settings') ? ss.getSheetByName('Settings').getDataRange().getValues() : [];
+    let fuelHist = ss.getSheetByName('FuelPriceHistory') ? ss.getSheetByName('FuelPriceHistory').getDataRange().getValues() : [];
+    return ContentService.createTextOutput(JSON.stringify({trips, maint, settings, fuelHist})).setMimeType(ContentService.MimeType.JSON);
+  }
+  return ContentService.createTextOutput(JSON.stringify({status:'ok'})).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Time-driven trigger for date-wise petrol price auto-update (optional)
+// You can set up daily trigger manually: Edit > Triggers > Add Trigger > updateFuelPriceDaily > Time-driven > Daily
+function updateFuelPriceDaily(){
+  // For Kerala, you can manually maintain FuelPriceHistory or fetch from external API if available
+  // Example: log current price from Settings sheet
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sh = ss.getSheetByName('Settings');
+  if(!sh) return;
+  // Find fuelPrice value
+  const vals = sh.getDataRange().getValues();
+  let price = null;
+  vals.forEach(r=>{ if(r[0]==='fuelPrice' || r[0]==='Current Fuel Price') price=r[1]; });
+  if(price){
+    let hist = ss.getSheetByName('FuelPriceHistory') || ss.insertSheet('FuelPriceHistory');
+    if(hist.getLastRow()===0) hist.appendRow(['Date','Price Rs/L','Timestamp']);
+    hist.appendRow([new Date().toISOString().slice(0,10), price, new Date().toISOString()]);
+  }
+}
+`;
+document.getElementById('codeGs').textContent=codeGsContent;
+function copyCode(){ navigator.clipboard.writeText(codeGsContent).then(()=>alert('Code.gs copied ✓')); }
+function downloadCode(){ const blob=new Blob([codeGsContent],{type:'text/plain'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='Code.gs'; a.click(); }
+
+// INIT
+loadAll();
+</script>
+</body>
+</html>
