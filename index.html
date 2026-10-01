@@ -109,7 +109,7 @@ footer{margin-top:2rem;padding:1.2rem;text-align:center;font-size:0.72rem;color:
 
 <div style="background:#FFF3CD;border:1px solid #FFD666;border-radius:10px;padding:10px;margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
   <span style="font-size:0.82rem;color:#7A5A00">📱 Sync Status:</span>
-  <span id="syncStatus" style="font-size:0.82rem;color:#1B3A6B;font-weight:700">Checking...</span>
+  <span id="syncStatus" style="margin-bottom:8px;display:block" style="font-size:0.82rem;color:#1B3A6B;font-weight:700">Checking...</span>
   <button class="btn btn-gold" style="padding:6px 10px;font-size:0.75rem" onclick="loadFromSheetSafe()">🔄 Check Sheet</button>
   <button class="btn btn-navy" style="padding:6px 10px;font-size:0.75rem" onclick="pushLocalToSheet()">⬆️ Push Local 8786 → Sheet (Fix Empty)</button>
 </div>
@@ -120,7 +120,7 @@ footer{margin-top:2rem;padding:1.2rem;text-align:center;font-size:0.72rem;color:
   <span style="font-size:0.8rem">🔗 Google Sheet Web App URL (Apps Script):</span>
   <input id="sheetUrl" placeholder="Paste Apps Script Web App URL here – like https://script.google.com/macros/s/AKfycbyQO8IDF0M8vonisoep-S5SbkYmCSZxZGNjzpc_hDrlHE-D6AnkUEZ8pDsEEKKSwWKB/exec">
   <button class="btn btn-gold" style="padding:7px 12px;font-size:0.8rem" onclick="saveSheetUrl()">Save</button>
-  <span id="syncStatus" style="font-size:0.75rem;color:#9FDDB2"></span>
+  <span id="syncStatus" style="margin-bottom:8px;display:block" style="font-size:0.75rem;color:#9FDDB2"></span>
 </div>
 
 <!-- DASHBOARD -->
@@ -737,79 +737,152 @@ function copyCode(){ navigator.clipboard.writeText(codeGsContent).then(()=>alert
 function downloadCode(){ const blob=new Blob([codeGsContent],{type:'text/plain'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='Code.gs'; a.click(); }
 
 
-// === SAFE SYNC FIX 28-Sep-2026 - Fixes 8707 vs 8786 + Sheet empty ===
-function loadFromSheetSafe(){
-  const url = localStorage.getItem(LS_SHEETURL) || DEFAULT_SHEET_URL;
-  if(!url) return;
+// === SAFE SYNC FIX 02-Oct-2026 - Phone ↔ Computer sync fix ===
+function getSheetUrl(){
+  return (localStorage.getItem(LS_SHEETURL) || DEFAULT_SHEET_URL || '').trim();
+}
+function loadFromSheetSafe(force){
+  const url = getSheetUrl();
   const statusEl = document.getElementById('syncStatus');
-  if(statusEl) statusEl.textContent='Checking Sheet...';
-  fetch(url + '?action=getAll&t=' + Date.now())
-    .then(r=>r.json())
+  if(!url){
+    if(statusEl) statusEl.textContent='⚠ No Sheet URL set - check Settings';
+    return;
+  }
+  if(statusEl) statusEl.textContent='⏳ Checking Sheet...';
+  fetch(url + '?action=getAll&t=' + Date.now(), {cache:'no-store'})
+    .then(r=>{
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    })
     .then(data=>{
-      let sheetTrips2D = data.trips || data.tripLog || [];
-      if(!sheetTrips2D || sheetTrips2D.length<=1){
-        if(statusEl) statusEl.textContent='Sheet empty (0 trips) - Keeping local '+trips.length+' trips. Tap Push Local to Sheet to fix.';
-        console.log('Sheet empty, keeping local');
+      let sheetTrips2D = data.trips || data.tripLog || data.TripLog || [];
+      let sheetCount = (sheetTrips2D && sheetTrips2D.length>1) ? sheetTrips2D.length-1 : 0;
+      let localCount = trips ? trips.length : 0;
+      
+      // Sheet empty case
+      if(sheetCount===0){
+        if(localCount>0){
+          if(statusEl) statusEl.textContent='Sheet empty (0) - Phone has '+localCount+' trips. TAP "Push Local to Sheet" to sync to computer.';
+          // auto-prompt once
+          if(!window._emptyPrompted){
+            window._emptyPrompted=true;
+            console.log('Sheet empty, local has data');
+          }
+        } else {
+          if(statusEl) statusEl.textContent='Sheet & Local empty - start adding trips on phone, then Push to Sheet';
+        }
         return;
       }
-      let sheetCount = sheetTrips2D.length-1;
-      let localCount = trips.length;
-      if(statusEl) statusEl.textContent='Sheet: '+sheetCount+' trips, Local: '+localCount+' trips';
-      if(sheetCount > localCount){
-        // Sheet has MORE - overwrite local (phone behind)
-        let newTrips = [];
-        for(let i=1;i<sheetTrips2D.length;i++){
-          let row = sheetTrips2D[i];
-          if(!row || row.length<3) continue;
-          newTrips.push({
-            date: row[0] ? new Date(row[0]).toISOString().slice(0,10) : new Date().toISOString().slice(0,10),
-            start_km: parseFloat(row[1])||0,
-            end_km: parseFloat(row[2])||0,
-            km_done: parseFloat(row[3])|| (parseFloat(row[2])-parseFloat(row[1]))||0,
-            destination: row[4]||'',
-            fuel_cost: parseFloat(row[5])||0,
-            liters: parseFloat(row[6])||0,
-            price_per_liter: parseFloat(row[7])||0,
-            price_at_fill: parseFloat(row[8])||0
-          });
-        }
-        if(newTrips.length>0){
-          trips = newTrips;
-          localStorage.setItem(LS_TRIPS, JSON.stringify(trips));
-          renderDashboard();
-          renderTripTable();
-          if(statusEl) statusEl.textContent='✓ Updated from Sheet: '+sheetCount+' trips, Last '+(trips[trips.length-1]?.end_km||'')+' km';
-        }
+      
+      // Both have data
+      if(statusEl) statusEl.textContent='Sheet: '+sheetCount+' trips, Local: '+localCount+' trips — comparing...';
+      
+      // If computer (local 0) and sheet has data -> always load sheet
+      if(localCount===0 && sheetCount>0){
+        console.log('Local empty, loading '+sheetCount+' from sheet (computer case)');
+        applySheetTrips(sheetTrips2D);
+        if(statusEl) statusEl.textContent='✓ Computer synced: loaded '+sheetCount+' trips from Sheet. Last '+(trips[trips.length-1]?.end_km||'')+' km';
+        return;
+      }
+      
+      if(sheetCount > localCount || force){
+        // Sheet has more -> overwrite local (phone behind or computer behind)
+        applySheetTrips(sheetTrips2D);
+        if(statusEl) statusEl.textContent='✓ Updated from Sheet: '+sheetCount+' trips, Last '+(trips[trips.length-1]?.end_km||'')+' km';
       } else if(sheetCount < localCount){
-        if(statusEl) statusEl.textContent='Local has MORE ('+localCount+') than Sheet ('+sheetCount+') - Your 8786 is in local. Tap Push Local to Sheet.';
+        if(statusEl) statusEl.textContent='Local has MORE ('+localCount+') than Sheet ('+sheetCount+') — phone has latest (8786). Tap Push Local to Sheet to sync to computer.';
       } else {
-        if(statusEl) statusEl.textContent='✓ Local & Sheet in sync: '+localCount+' trips';
+        // same count, but check last km diff for 8707 vs 8786 case
+        let lastSheetKm = 0;
+        try{ lastSheetKm = parseFloat(sheetTrips2D[sheetTrips2D.length-1][2])||0; }catch(e){}
+        let lastLocalKm = trips.length ? (trips[trips.length-1].end_km||0) : 0;
+        if(lastLocalKm !== lastSheetKm){
+          if(statusEl) statusEl.textContent='Same count but KM mismatch (Sheet '+lastSheetKm+' vs Local '+lastLocalKm+'). Tap Push if phone is correct.';
+        } else {
+          if(statusEl) statusEl.textContent='✓ Local & Sheet in sync: '+localCount+' trips, '+lastLocalKm+' km';
+        }
       }
     })
     .catch(e=>{
       console.log('Sheet fetch failed', e);
-      if(statusEl) statusEl.textContent='Sheet fetch failed: '+e.message+' - Using local';
+      if(statusEl) statusEl.textContent='❌ Sheet fetch failed: '+e.message+' — Check internet, Sheet URL, and Web App deployed as Anyone. Using local '+trips.length+' trips';
     });
 }
 
+function applySheetTrips(sheetTrips2D){
+  let newTrips = [];
+  for(let i=1;i<sheetTrips2D.length;i++){
+    let row = sheetTrips2D[i];
+    if(!row || row.length<3) continue;
+    let d = row[0];
+    try{ if(d) d = new Date(d).toISOString().slice(0,10); }catch(e){ d = new Date().toISOString().slice(0,10); }
+    newTrips.push({
+      date: d || new Date().toISOString().slice(0,10),
+      start_km: parseFloat(row[1])||0,
+      end_km: parseFloat(row[2])||0,
+      km_done: parseFloat(row[3])|| (parseFloat(row[2])-parseFloat(row[1]))||0,
+      destination: row[4]||'',
+      fuel_cost: parseFloat(row[5])||0,
+      liters: parseFloat(row[6])||0,
+      price_per_liter: parseFloat(row[7])||0,
+      price_at_fill: parseFloat(row[8])||0
+    });
+  }
+  if(newTrips.length>0){
+    trips = newTrips;
+    localStorage.setItem(LS_TRIPS, JSON.stringify(trips));
+    try{ renderDashboard(); }catch(e){}
+    try{ renderTripTable(); }catch(e){}
+    localStorage.setItem('exter_last_sync', new Date().toISOString());
+  }
+}
+
 function pushLocalToSheet(){
-  if(!confirm('Push ALL '+trips.length+' local trips to Sheet? This will recover 8786 if Sheet is empty. Continue?')) return;
-  const url = localStorage.getItem(LS_SHEETURL) || DEFAULT_SHEET_URL;
+  if(trips.length===0){ alert('No local trips to push'); return; }
+  if(!confirm('Push ALL '+trips.length+' local trips to Sheet? This will sync phone → Sheet → Computer. Continue?')) return;
+  const url = getSheetUrl();
+  const statusEl = document.getElementById('syncStatus');
   let done=0;
+  let failed=0;
+  if(statusEl) statusEl.textContent='⏳ Pushing '+trips.length+' trips to Sheet...';
   trips.forEach((t,i)=>{
     setTimeout(()=>{
-      fetch(url, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'saveTrip', data:t, timestamp:new Date().toISOString()})})
-      .then(()=>{ done++; document.getElementById('syncStatus').textContent='Pushed '+done+'/'+trips.length+' to Sheet...'; if(done===trips.length) setTimeout(loadFromSheetSafe,1000); });
-    }, i*300);
+      fetch(url, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify({action:'saveTrip', data:t, timestamp:new Date().toISOString()})})
+      .then(()=>{ 
+        done++; 
+        if(statusEl) statusEl.textContent='Pushed '+done+'/'+trips.length+' to Sheet...';
+        if(done===trips.length){
+          if(statusEl) statusEl.textContent='✓ Pushed '+done+' trips to Sheet — now open on computer and tap Sync';
+          setTimeout(()=>loadFromSheetSafe(true), 1500);
+        }
+      })
+      .catch(()=>{ failed++; });
+    }, i*350);
   });
 }
 
 function forceClearAndReload(){
-  if(confirm('Clear phone cache and reload from Sheet?')){
+  if(confirm('Clear phone/computer cache and reload from Sheet? Local trips will be replaced by Sheet data. Continue?')){
+    localStorage.removeItem(LS_TRIPS);
     localStorage.removeItem('exter_trips_v2');
     location.reload();
   }
 }
+
+function forcePullFromSheet(){
+  if(confirm('Force load from Sheet? This will overwrite local with Sheet data (good for computer). Continue?')){
+    loadFromSheetSafe(true);
+  }
+}
+
+// Auto re-sync when tab becomes visible (computer comes back)
+document.addEventListener('visibilitychange', ()=>{
+  if(!document.hidden){
+    console.log('Tab visible - re-syncing');
+    setTimeout(loadFromSheetSafe, 800);
+  }
+});
+
 
 
 // INIT
@@ -817,7 +890,5 @@ loadAll();
 setTimeout(loadFromSheetSafe, 1500);
 
 </script>
-
 </body>
-
 </html>
